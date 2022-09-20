@@ -1,0 +1,387 @@
+---
+title: "Lista01"
+author: "Heitor Carvalho Pinheiro - 11833351"
+date: "2022-09-15"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(reticulate)
+library(tibble)
+library(rgl)
+library(gmodels)
+library(DescTools)
+library(data.table)
+```
+
+## 1ª Lista de exercícios - SME0822
+
+### Exercício 1.1.4
+
+```{r, echo=FALSE}
+#creating the dataframe 
+
+companies <- tibble(
+  
+  companies = c(
+    "Citigroup",
+    "General Electric", 
+    "American Intl Group", 
+   "Bank of America",
+    "HSBC Group", 
+    "ExxonMobil",
+    "Royal Dutch/Shell",
+   "BP",
+    "ING Group" ,
+    "Toyota Motor" 
+
+  ),
+  
+  sales = c(
+          108.28, 
+          152.36,
+          95.04 ,
+          65.45 ,
+          62.97 ,
+          263.99, 
+          265.19, 
+          285.06, 
+          92.01 ,
+          165.68 
+),
+
+  profits = c(
+    17.05 ,
+    16.59 ,
+    10.91 ,
+    14.14 ,
+    9.52 ,
+    25.33 ,
+    18.54 ,
+    15.73 ,
+    8.10 ,
+    11.13 
+
+  ),
+
+  assets = c(
+    1484.10 ,
+    750.33 ,
+    766.42 ,
+    1110.46,
+    1031.29 ,
+    195.26 ,
+    193.83 ,
+    191.11 ,
+    1175.16 ,
+    211.15 
+
+  )
+)
+
+companies
+
+```
+
+a) Plot the scatter diagram and marginal dot diagrams for variables x1 and x2. Comment
+on the appearance of the diagrams.
+
+```{r}
+#plotting a scatter diagram for the sales and profits
+
+ggplot(data = companies, mapping = aes(x = sales, y = profits)) + 
+  geom_point() + 
+  scale_size_discrete() +
+  geom_rug()
+```
+
+O gráfico marginal do lucro concentra-se em valores abaixo de 18 bilhões. Já o gráfico marginal de vendas, apresenta-se muito mais disperso, com valores que variam de 10 bilhões a mais de 250 bilhões.
+
+O gráfico de dispersão, visualmente, parece desmonstrar uma correlação positiva entre as variáveis, porém não muito acentuada. Ou seja, conforme as vendas aumentam o lucro também aumenta.
+
+b) Compute $\bar{x}_{1}$, $\bar{x}_{2}$, $s_{11}$, $s_{22}$, $s_{1,2}$ and $r_{12}$. Interprete $r_{12}$
+
+```{r}
+#media de x1
+media.x1 <- mean(companies$sales)
+media.x2 <- mean(companies$profits)
+var.x1 <- var(companies$sales)
+var.x2 <- var(companies$profits)
+cov.x1x2 <- cov(companies$sales, companies$profits)
+corr.x1x2 <- cor(companies$sales, companies$profits, method = 'pearson')
+
+stats <- list(media.x1, media.x2, var.x1, var.x2, cov.x1x2, corr.x1x2)
+
+#creating a tibble with results 
+
+names <- c("Media x1", "Media x2", "Variancia x1", "Variancia x2", "Covariancia", "Correlacao")
+
+counter = 1
+for (value in stats){
+  value = round(value,2)
+  print(paste(names[counter],"=", value))
+  counter = counter + 1
+}
+
+```
+
+O valor de $r_{12} = 0.69$, confirma a correlação positiva entre as duas variáveis, porém, a correlação não é muito acentuada.
+
+### Exercício 1.1.5 
+
+Use the data in 1.1.4
+
+a) Plot the scatter diagrams and dot diagrams for ($x_{2}, x_{3}$) and ($x_{1}, x_{3}$)  Comment on
+the patterns.
+
+Diagrama de dispersão para ($x_{2}, x_{3}$)
+
+```{r, echo=FALSE}
+#plotting a scatter diagram for the sales and profits
+
+ggplot(data = companies, mapping = aes(x = profits, y = assets)) + 
+  geom_point() + 
+  scale_size_discrete() +
+  geom_rug()
+```
+
+Não parece existir correlação evidente entre o lucro e valor em ações das empresas.
+Semelhante aos lucros, o valor em ações de cada empresa, possui grande variância, indo de empresas com duas centenas de bilhão em ações a empresas com mais de trilhões em ações.
+
+b) Compute the $\bar{x}$, $S_{n}$ and $\textbf{R}$ arrays for $(x_{1}, x_{2}, x_{3})$
+
+```{r}
+#vetor de medias 
+media.x3 <- mean(companies$assets)
+var.x3 <- var(companies$assets)
+
+#medias
+media.x1
+media.x2
+media.x3
+```
+
+**Vetor de Médias**
+
+
+$$
+\textbf{X} = 
+
+\begin{bmatrix}
+
+155.6 \\
+
+14.7 \\
+
+711 \\
+
+\end{bmatrix}
+$$
+
+**Vetor de Covariâncias**
+
+```{r, include=FALSE}
+#covariancias
+cov.x1x3 <- cov(companies$sales, companies$assets)
+cov.x2x3 <- cov(companies$profits, companies$assets)
+
+
+var.x1
+var.x2
+var.x3
+cov.x1x2
+cov.x1x3
+cov.x2x3
+
+```
+
+
+$$
+S_{n} = 
+
+\begin{bmatrix}
+
+7476.4 & 303.6 & -35576 \\
+
+303.6 & 26.2 & -1053.9 \\
+
+-35576 & -1053.9 & 23754.3 \\
+
+\end{bmatrix}
+$$
+
+**Vetor de Correlação**
+
+```{r, include=FALSE}
+#valores da correlacao
+corr.x2x3 <- cor(companies$profits, companies$assets, method = 'pearson')
+corr.x1x3 <- cor(companies$sales, companies$assets, method = 'pearson')
+
+
+corr.x1x2
+corr.x1x3
+corr.x2x3
+```
+
+
+
+$$
+\textbf{R} = 
+
+\begin{bmatrix}
+
+1 & 0.69 & -0.84 \\
+
+0.69 & 1 & -0.42 \\
+
+-0.84 & -0.42 & 1 \\
+
+\end{bmatrix}
+$$
+
+### Exercise 1.1.24
+
+
+```{r}
+#plotting in 3d 
+
+oxygen <- read.csv("oxygen.csv", sep = ";")
+
+#setting the colors 
+mycolors <- c('royalblue', 'red')
+oxygen$color <- mycolors[as.numeric(oxygen$sex)]
+
+#plot 
+
+plot3d(
+  x = oxygen$`x1`, y = oxygen$x2, z = oxygen$x3,
+  type = 'p',
+  xlab = "x1", ylab = "x2", zlab = "x3")
+
+rglwidget()
+```
+**Checking for Outliers**
+
+```{r, echo=FALSE, include=FALSE}
+arrayInd(which.max(as.matrix(oxygen)), .dim = dim(oxygen))
+arrayInd(which.min(as.matrix(oxygen)), .dim = dim(oxygen))
+```
+
+A análise do Scatterplot em 3D, nos permite identificar 2 outliers facilmente.
+
+* Outlier 1: $(x_1 = 0.11, x_2 = 1.74, x_3=2.49)$
+* Outlier 2: $(x_1 = 0.66, x_2 = 11.05, x_3=2.32)$
+
+Também existem métodos quantitativos para detecção de outliers, os quais não abordaremos aqui.
+
+### Exercício 03
+
+```{r, echo=FALSE, include=FALSE}
+#creating the dataset 
+
+blood.age <- tibble(
+  Exame = c("Sangue", "Endoscopia", "Eletrocardiograma","Outros"),
+  "Ate 18 anos" = c(60,10,6,24),
+  "18 a 30 anos" = c(100,24,6,30),
+  "30 a 45 anos" = c(150,100,20,40),
+  "45 anos ou mais" = c(350,80,60,50)
+)
+
+blood.age
+
+#dataset 2 
+
+blood2 <- tibble(
+  Exame = c(rep("Sangue",60), rep("Endoscopia",10), rep("Eletrocardiograma",6),rep("Outros",24),
+            rep("Sangue",100), rep("Endoscopia",24), rep("Eletrocardiograma",6),rep("Outros",30),
+            rep("Sangue",150), rep("Endoscopia",100), rep("Eletrocardiograma",20),rep("Outros",40),
+            rep("Sangue",350), rep("Endoscopia",80), rep("Eletrocardiograma",60),rep("Outros",50)
+            ),
+  "Faixa Etária" = c(rep("Ate 18 anos",60),rep("Ate 18 anos",10),rep("Ate 18 anos",6),rep("Ate 18 anos",24),
+                     rep("18 a 30 anos",100), rep("18 a 30 anos",24),rep("18 a 30 anos",6),rep("18 a 30 anos",30),
+                     rep("30 a 45 anos",150),rep("30 a 45 anos",100),rep("30 a 45 anos",20),rep("30 a 45 anos",40),
+                     rep("45 anos ou mais",350), rep("45 anos ou mais",80), rep("45 anos ou mais",60),
+                     rep("45 anos ou mais",50))
+  
+)
+
+blood2
+```
+a) Avalie se há associação entre as variáveis faixa etária e exame solicitado.
+
+**Verificando a existência de dependência**
+
+```{r, echo=FALSE}
+cont.table.blood <- CrossTable(blood2$Exame, blood2$`Faixa Etária`, prop.c = FALSE, prop.t = FALSE)
+```
+Analisando as proporções marginais em relação às linhas, caso houvesse independência entre as variáveis para cada elemento esperaríamos uma proporção semelhante ao total da linha. Por exemplo, a proporção de eletrocardiogramas corresponde a cerca de 8.3% dos exames. Percebe-se que conforme a idade aumenta a proporção do exame também aumenta e esse padrão se observa entre todos os exames. Desse modo, **há associação entre as variáveis faixa etária e exame solicitado**.
+
+b) Determine e interprete o coeficiente de Tschuprow
+
+Podemos definir o coeficiente de Tschuprow, a apartir da seguinte formula:
+
+$$
+{\displaystyle \phi ^{2}=\sum _{i=1}^{r}\sum _{j=1}^{c}{\frac {(\pi _{ij}-\pi _{i+}\pi _{+j})^{2}}{\pi _{i+}\pi _{+j}}}}
+$$
+
+Em que $\phi$ é o coeficiente de contigência da média quadrática.
+
+E ${\displaystyle \pi _{i+}=\sum _{j=1}^{c}\pi _{ij}}$ é o somatório das proporções para a linha $i$ e ${\displaystyle \pi _{+j}=\sum _{i=1}^{r}\pi _{ij}.}$ é o somatório das proporções para a coluna $j$.
+
+Sendo assim, define-se o coeficiente de Tschuprow, da seguinte maneira.
+
+$$
+{\displaystyle T={\sqrt {\frac {\phi ^{2}}{\sqrt {(r-1)(c-1)}}}}.}
+$$
+
+Perceba que o coeficiente de Tschuprow é uma espécie de normalização do valor de $\phi$.
+
+O coeficiente de Tschuprow $T$ nos indica se existe correlação entre variáveis categóricas em uma tabela de contigência. 
+
+Desse modo, um $T>0$ indica que existe correlação, se $T = 0$, não existe correlação. Sendo $0 \leq T \leq1$
+
+O coeficiente de Tschuprow para a tabela de contingência entre Faixa Etária e Exame é:
+
+$$
+T = 0.15
+$$
+
+```{r, echo=FALSE}
+# calculando o coeficiente de Tschuprow para os nossos dados
+
+#converting the tibble to a table
+blood.table <- table(blood2)
+blood.table
+typeof(blood.table)
+
+#calculating the Tschuprow T
+TschuprowT(blood.table)
+```
+O que implica que existe dependência entre as variáveis.
+
+### Exercício 6
+
+Considerando a nossa forma quadrática $2x_1^2-2x_1x_2+x_2^2+4x_1x_3-3x_3^2$, podemos verificar que os valores correspondentes à diagonal principal serão 2,1 e -3. Os valores correspondentes às entradas $(i,j) = (1,2)$ e $(i,j) = (2,1)$ devem resultar em -2, uma vez que temos $-2x_1x_2$, logo, ambos são -1. Por fim o mesmo princípio se aplica às entradas correspodentes a $(i,j) = (1,3)$ e $(i,j) = (3,1)$, como temos que $4x_1x_3$, logo essas entradas recebem o valor 2. As entradas para $(i,j) = (2,3)$ e $(i,j) = (3,2)$ recebem o valor 0.
+
+Por fim, a matriz $A$ associada à forma quadrática é:
+
+$$
+A = 
+\begin{bmatrix}
+
+2 & -1 & 2 \\
+
+-1 & 1 & 0 \\
+
+2 & 0 & -3 \\
+
+\end{bmatrix}
+$$
+
+### Exercício 7
+
+

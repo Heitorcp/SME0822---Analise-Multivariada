@@ -1,0 +1,418 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Lista01},
+  pdfauthor={Heitor Carvalho Pinheiro - 11833351},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lista01}
+\author{Heitor Carvalho Pinheiro - 11833351}
+\date{2022-09-15}
+
+\begin{document}
+\maketitle
+
+\hypertarget{uxaa-lista-de-exercuxedcios---sme0822}{%
+\subsection{1ª Lista de exercícios -
+SME0822}\label{uxaa-lista-de-exercuxedcios---sme0822}}
+
+\hypertarget{exercuxedcio-1.1.4}{%
+\subsubsection{Exercício 1.1.4}\label{exercuxedcio-1.1.4}}
+
+\begin{verbatim}
+## # A tibble: 10 x 4
+##    companies           sales profits assets
+##    <chr>               <dbl>   <dbl>  <dbl>
+##  1 Citigroup           108.    17.0   1484.
+##  2 General Electric    152.    16.6    750.
+##  3 American Intl Group  95.0   10.9    766.
+##  4 Bank of America      65.4   14.1   1110.
+##  5 HSBC Group           63.0    9.52  1031.
+##  6 ExxonMobil          264.    25.3    195.
+##  7 Royal Dutch/Shell   265.    18.5    194.
+##  8 BP                  285.    15.7    191.
+##  9 ING Group            92.0    8.1   1175.
+## 10 Toyota Motor        166.    11.1    211.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Plot the scatter diagram and marginal dot diagrams for variables x1
+  and x2. Comment on the appearance of the diagrams.
+\end{enumerate}
+
+\begin{verbatim}
+## Warning: Using size for a discrete variable is not advised.
+\end{verbatim}
+
+\includegraphics{lista01_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+O gráfico marginal do lucro concentra-se em valores abaixo de 18
+bilhões. Já o gráfico marginal de vendas, apresenta-se muito mais
+disperso, com valores que variam de 10 bilhões a mais de 250 bilhões.
+
+O gráfico de dispersão, visualmente, parece desmonstrar uma correlação
+positiva entre as variáveis, porém não muito acentuada. Ou seja,
+conforme as vendas aumentam o lucro também aumenta.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Compute \(\bar{x}_{1}\), \(\bar{x}_{2}\), \(s_{11}\), \(s_{22}\),
+  \(s_{1,2}\) and \(r_{12}\). Interprete \(r_{12}\)
+\end{enumerate}
+
+\begin{verbatim}
+## [1] "Media x1 = 155.6"
+## [1] "Media x2 = 14.7"
+## [1] "Variancia x1 = 7476.45"
+## [1] "Variancia x2 = 26.19"
+## [1] "Covariancia = 303.62"
+## [1] "Correlacao = 0.69"
+\end{verbatim}
+
+O valor de \(r_{12} = 0.69\), confirma a correlação positiva entre as
+duas variáveis, porém, a correlação não é muito acentuada.
+
+\hypertarget{exercuxedcio-1.1.5}{%
+\subsubsection{Exercício 1.1.5}\label{exercuxedcio-1.1.5}}
+
+Use the data in 1.1.4
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Plot the scatter diagrams and dot diagrams for (\(x_{2}, x_{3}\)) and
+  (\(x_{1}, x_{3}\)) Comment on the patterns.
+\end{enumerate}
+
+Diagrama de dispersão para (\(x_{2}, x_{3}\))
+
+\begin{verbatim}
+## Warning: Using size for a discrete variable is not advised.
+\end{verbatim}
+
+\includegraphics{lista01_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Não parece existir correlação evidente entre o lucro e valor em ações
+das empresas. Semelhante aos lucros, o valor em ações de cada empresa,
+possui grande variância, indo de empresas com duas centenas de bilhão em
+ações a empresas com mais de trilhões em ações.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Compute the \(\bar{x}\), \(S_{n}\) and \(\textbf{R}\) arrays for
+  \((x_{1}, x_{2}, x_{3})\)
+\end{enumerate}
+
+\begin{verbatim}
+## [1] 155.603
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 14.704
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 710.911
+\end{verbatim}
+
+\textbf{Vetor de Médias}
+
+\$\$ \textbf{X} =
+
+\begin{bmatrix}
+
+155.6 \\
+
+14.7 \\
+
+711 \\
+
+\end{bmatrix}
+
+\$\$
+
+\textbf{Vetor de Covariâncias}
+
+\$\$ S\_\{n\} =
+
+\begin{bmatrix}
+
+7476.4 & 303.6 & -35576 \\
+
+303.6 & 26.2 & -1053.9 \\
+
+-35576 & -1053.9 & 23754.3 \\
+
+\end{bmatrix}
+
+\$\$
+
+\textbf{Vetor de Correlação}
+
+\$\$ \textbf{R} =
+
+\begin{bmatrix}
+
+1 & 0.69 & -0.84 \\
+
+0.69 & 1 & -0.42 \\
+
+-0.84 & -0.42 & 1 \\
+
+\end{bmatrix}
+
+\$\$
+
+\hypertarget{exercise-1.1.24}{%
+\subsubsection{Exercise 1.1.24}\label{exercise-1.1.24}}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in snapshot3d(scene = x, width = width, height = height): webshot = TRUE
+## requires the webshot2 package and Chrome browser; using rgl.snapshot() instead
+\end{verbatim}
+
+\includegraphics[width=6.5in]{C:\Users\heito\AppData\Local\Temp\RtmpuAOjQ4\file379858a96193}
+\textbf{Checking for Outliers}
+
+A análise do Scatterplot em 3D, nos permite identificar 2 outliers
+facilmente.
+
+\begin{itemize}
+\tightlist
+\item
+  Outlier 1: \((x_1 = 0.11, x_2 = 1.74, x_3=2.49)\)
+\item
+  Outlier 2: \((x_1 = 0.66, x_2 = 11.05, x_3=2.32)\)
+\end{itemize}
+
+Também existem métodos quantitativos para detecção de outliers, os quais
+não abordaremos aqui.
+
+\hypertarget{exercuxedcio-03}{%
+\subsubsection{Exercício 03}\label{exercuxedcio-03}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Avalie se há associação entre as variáveis faixa etária e exame
+  solicitado.
+\end{enumerate}
+
+\textbf{Verificando a existência de dependência}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## | Chi-square contribution |
+## |           N / Row Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1110 
+## 
+##  
+##                   | blood2$`Faixa Etária` 
+##      blood2$Exame |    18 a 30 anos |    30 a 45 anos | 45 anos ou mais |     Ate 18 anos |       Row Total | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+## Eletrocardiograma |               6 |              20 |              60 |               6 |              92 | 
+##                   |           3.976 |           1.262 |           5.192 |           0.632 |                 | 
+##                   |           0.065 |           0.217 |           0.652 |           0.065 |           0.083 | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+##        Endoscopia |              24 |             100 |              80 |              10 |             214 | 
+##                   |           1.520 |          27.086 |           5.583 |           4.466 |                 | 
+##                   |           0.112 |           0.467 |           0.374 |           0.047 |           0.193 | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+##            Outros |              30 |              40 |              50 |              24 |             144 | 
+##                   |           4.116 |           0.001 |           5.741 |           9.373 |                 | 
+##                   |           0.208 |           0.278 |           0.347 |           0.167 |           0.130 | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+##            Sangue |             100 |             150 |             350 |              60 |             660 | 
+##                   |           0.249 |           6.392 |           2.605 |           0.005 |                 | 
+##                   |           0.152 |           0.227 |           0.530 |           0.091 |           0.595 | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+##      Column Total |             160 |             310 |             540 |             100 |            1110 | 
+## ------------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+## 
+## 
+\end{verbatim}
+
+Analisando as proporções marginais em relação às linhas, caso houvesse
+independência entre as variáveis para cada elemento esperaríamos uma
+proporção semelhante ao total da linha. Por exemplo, a proporção de
+eletrocardiogramas corresponde a cerca de 8.3\% dos exames. Percebe-se
+que conforme a idade aumenta a proporção do exame também aumenta e esse
+padrão se observa entre todos os exames. Desse modo, \textbf{há
+associação entre as variáveis faixa etária e exame solicitado}.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Determine e interprete o coeficiente de Tschuprow
+\end{enumerate}
+
+Podemos definir o coeficiente de Tschuprow, a apartir da seguinte
+formula:
+
+\[
+{\displaystyle \phi ^{2}=\sum _{i=1}^{r}\sum _{j=1}^{c}{\frac {(\pi _{ij}-\pi _{i+}\pi _{+j})^{2}}{\pi _{i+}\pi _{+j}}}}
+\]
+
+Em que \(\phi\) é o coeficiente de contigência da média quadrática.
+
+E \({\displaystyle \pi _{i+}=\sum _{j=1}^{c}\pi _{ij}}\) é o somatório
+das proporções para a linha \(i\) e
+\({\displaystyle \pi _{+j}=\sum _{i=1}^{r}\pi _{ij}.}\) é o somatório
+das proporções para a coluna \(j\).
+
+Sendo assim, define-se o coeficiente de Tschuprow, da seguinte maneira.
+
+\[
+{\displaystyle T={\sqrt {\frac {\phi ^{2}}{\sqrt {(r-1)(c-1)}}}}.}
+\]
+
+Perceba que o coeficiente de Tschuprow é uma espécie de normalização do
+valor de \(\phi\).
+
+O coeficiente de Tschuprow \(T\) nos indica se existe correlação entre
+variáveis categóricas em uma tabela de contigência.
+
+Desse modo, um \(T>0\) indica que existe correlação, se \(T = 0\), não
+existe correlação. Sendo \(0 \leq T \leq1\)
+
+O coeficiente de Tschuprow para a tabela de contingência entre Faixa
+Etária e Exame é:
+
+\[
+T = 0.15
+\]
+
+\begin{verbatim}
+##                    Faixa Etária
+## Exame               18 a 30 anos 30 a 45 anos 45 anos ou mais Ate 18 anos
+##   Eletrocardiograma            6           20              60           6
+##   Endoscopia                  24          100              80          10
+##   Outros                      30           40              50          24
+##   Sangue                     100          150             350          60
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.1532396
+\end{verbatim}
+
+O que implica que existe dependência entre as variáveis.
+
+\hypertarget{exercuxedcio-6}{%
+\subsubsection{Exercício 6}\label{exercuxedcio-6}}
+
+Considerando a nossa forma quadrática
+\(2x_1^2-2x_1x_2+x_2^2+4x_1x_3-3x_3^2\), podemos verificar que os
+valores correspondentes à diagonal principal serão 2,1 e -3. Os valores
+correspondentes às entradas \((i,j) = (1,2)\) e \((i,j) = (2,1)\) devem
+resultar em -2, uma vez que temos \(-2x_1x_2\), logo, ambos são -1. Por
+fim o mesmo princípio se aplica às entradas correspodentes a
+\((i,j) = (1,3)\) e \((i,j) = (3,1)\), como temos que \(4x_1x_3\), logo
+essas entradas recebem o valor 2. As entradas para \((i,j) = (2,3)\) e
+\((i,j) = (3,2)\) recebem o valor 0.
+
+Por fim, a matriz \(A\) associada à forma quadrática é:
+
+\$\$ A =
+
+\begin{bmatrix}
+
+2 & -1 & 2 \\
+
+-1 & 1 & 0 \\
+
+2 & 0 & -3 \\
+
+\end{bmatrix}
+
+\$\$
+
+\hypertarget{exercuxedcio-7}{%
+\subsubsection{Exercício 7}\label{exercuxedcio-7}}
+
+\end{document}
